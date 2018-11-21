@@ -13,16 +13,21 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log("User was disconnected");
   });
-  // socket.emit('newMessage', {
-  //   from: 'niteshsingh101@gmail.com',
-  //   text: 'Hello',
-  //   createAt: 1123
-  // });
+  socket.emit('newMessage', {
+    from: 'Admin',
+    text: 'Welcome to chat app',
+    createAt: new Date().getTime()
+  });
+  socket.broadcast.emit('newMessage', {
+    from: 'Admin',
+    text: 'New user joined',
+    createAt: new Date().getTime()
+  });
   socket.on('createMessage', (message) => {
     console.log("message", message);
     io.emit('newMessage', {
-      from: 'niteshsingh101@gmail.com',
-      text: 'Hello',
+      from: message.from,
+      text: message.text,
       createAt: new Date().getTime()
     } );
   });
