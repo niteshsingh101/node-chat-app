@@ -13,13 +13,18 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log("User was disconnected");
   });
-  socket.emit('newMessage', {
-    from: 'niteshsingh101@gmail.com',
-    text: 'Hello',
-    createAt: 1123
-  });
+  // socket.emit('newMessage', {
+  //   from: 'niteshsingh101@gmail.com',
+  //   text: 'Hello',
+  //   createAt: 1123
+  // });
   socket.on('createMessage', (message) => {
     console.log("message", message);
+    io.emit('newMessage', {
+      from: 'niteshsingh101@gmail.com',
+      text: 'Hello',
+      createAt: new Date().getTime()
+    } );
   });
 });
 
